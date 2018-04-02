@@ -1,0 +1,11 @@
+#Dependency
+node_modules
+
+#Mac files
+.DS_Store
+
+#Webstorm metadata
+.idea
+
+#VS Code
+.vscode
