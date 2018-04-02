@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { Table } from 'react-bootstrap';
 import { callAPI } from "../../actions/userListActions";
 import Loader from '../common/Loader';
+import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 
 class UsersTable extends Component{
     /* Constructor - Bind / Initial  */
@@ -17,36 +18,15 @@ class UsersTable extends Component{
     }
 
     render() {
+        const { userList } = this.props;
         return(
             <div>
                 <h1> Loading data from API </h1>
-                <Table striped bordered hover>
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            this.props.userList ? this.props.userList.map((user,i) => {
-                                return(
-                                    <tr key={i}>
-                                        <td>{user.userId}</td>
-                                        <td>{user.id}</td>
-                                        <td>{user.title}</td>
-                                    </tr>
-                                );
-                            })
-                            :  <tr>
-                                    <td style={{textAlign: "center"}} colSpan="3">
-                                        <Loader />
-                                    </td>
-                                </tr>
-                        }
-                    </tbody>
-                </Table>
+                <BootstrapTable ref="table" data={userList}>
+                    <TableHeaderColumn dataField="userId" isKey dataSort>User ID</TableHeaderColumn>
+                    <TableHeaderColumn dataField="id" dataSort>ID</TableHeaderColumn>
+                    <TableHeaderColumn dataField="title" dataSort>Last Name</TableHeaderColumn>
+                </BootstrapTable>
             </div>
         );
     }
